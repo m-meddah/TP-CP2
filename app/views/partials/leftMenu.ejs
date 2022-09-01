@@ -1,0 +1,33 @@
+<%# C'est dans le contenu principal mais cela de decrit pas ou ne qualifie ce contenu donc le défini comme a aprt, a
+  côté %>
+  <aside class="col-lg-3">
+
+    <h1 class="my-4">O'Fig</h1>
+    <%# il n'y pas 5 titre dans les page donc on va plutôt utiliser un h2. Mais en faisant on change également l'aspectr
+      visuel de ce titre dans le navigateur. Heureusement on utilise un frameword css (ici bootstrap) qui nous met a
+      disposition une série de classe correspondant aux règles de bases des balises HTML. Donc il nous suffit d'ajouter
+      la classe h5 à notre h2 pour qui ressemble a un h5. C'est une sorte de déguisement. %>
+      <h2 class="h5">Catégories</h2>
+      <%# Ici on rajoute une bvalise nav juste pour la sémantique, elle ne perturbe en rien l'affichage%>
+      <nav>
+        <%# On ajoute une liste non ordonné à la place du div, car ici on a une liste de liens%>
+        <ul class="list-group">
+          <%if(locals.categories){%>
+            <% for (const category of categories) { %>
+              <%# du coup on créer les éléments de liste en prenant soit de rapatrier la class d'item sur celui-ci%>
+              <li class="list-group-item">
+                <a class="d-flex justify-content-between align-items-center"
+                  href="/?category=<%=category.label%>">
+                  <%=category.label%>
+                    <span class="badge badge-primary badge-pill">
+                      <%=category.tot%>
+                    </span>
+                </a>
+              </li>
+              <% } %>
+            <% } %>
+        </ul>
+      </nav>
+
+  </aside>
+  <!-- /.col-lg-3 -->

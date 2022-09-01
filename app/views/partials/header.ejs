@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="<%=pageDescription%>">
+
+  <title><%=pageTitle%></title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <% if(locals.figurine) {%>
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": "Figurine Final Fantasy <%=figurine.name%>",
+      "category": "<%=figurine.category%>",
+      "height": {
+        "@type": "QuantitativeValue",
+        "value": <%=figurine.size%>,
+        "unitCode": "CMT"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "<%=figurine.price%>",
+        "priceCurrency": "USD"
+      },
+      "image": "https://<%=locals.domain%>/images/<%=figurine.name.toLowerCase()%>.png",
+      "description": "<%=figurine.description%>",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "worstRating": 1,
+        "bestRating": 5,
+        "ratingValue" : "<%=figurine.avgNote%>",
+        "ratingCount" : "<%=figurine.reviews.length%>",
+        "reviewCount" : "<%=figurine.reviews.length%>"
+      },
+      "review": [
+      <% for(const review of figurine.reviews){ %>
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "<%=review.author%>"
+          },
+          "reviewBody" : "<%=review.title%> - <%=review.message%>",
+          "reviewRating" : {
+            "@type": "Rating",
+            "worstRating": 1,
+            "ratingValue": <%=review.note%>,
+            "bestRating": 5,
+            "author": "<%=review.author%>"
+          }
+        }
+      <% } %>
+      ]
+    }
+    </script>
+    <% } %>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <%#nav class="navbar navbar-expand-lg fixed-top"%>
+  <%# Une nav c'est pas mal, mais un header c'est mieux%>
+  <header class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">O'Fig</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <%# ici c'est ici la nav plutô t %>
+      <nav class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/bookmarks">Favoris</a>
+          </li>
+          <li class="nav-item">
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-ofig my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <%# Ici ce n'est simplement un div c'est un container qui contient le contenu pricipale de la page %>
+  <main class="container container-main">
+
+    <div class="row">
